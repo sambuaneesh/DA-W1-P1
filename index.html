@@ -2,13 +2,42 @@
 <html>
   <head>
     <title>Random Anime Title Generator</title>
+    <!-- Link to custom CSS file -->
     <link rel="stylesheet" href="static/style.css" />
+    <!-- Link to Bootstrap CSS file from CDN -->
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
   </head>
   <body>
-    <h1>Random Anime Title Generator</h1>
-    <button id="generate-title-btn">Generate Title</button>
-    <div id="title-container"></div>
-    <div id="description-container"></div>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col text-center py-5">
+          <h1 class="display-3">Random Anime Title Generator</h1>
+          <button id="generate-title-btn" class="btn btn-primary mt-3">
+            Generate Title
+          </button>
+        </div>
+      </div>
+      <div class="row py-5">
+        <div class="col-md-6 mb-3 mb-md-0">
+          <div class="card h-100">
+            <div class="card-header">Title</div>
+            <div class="card-body" id="title-container"></div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="card h-100">
+            <div class="card-header">Description</div>
+            <div class="card-body" id="description-container"></div>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <script>
       const generateTitleBtn = document.getElementById("generate-title-btn");
@@ -18,13 +47,13 @@
       );
 
       generateTitleBtn.addEventListener("click", async () => {
-        const response = await fetch("http://localhost:5000/generate_title", {
+        const response = await fetch("/generate_title", {
           method: "POST",
         });
         const data = await response.json();
 
-        titleContainer.innerText = `Title: ${data.title}`;
-        descriptionContainer.innerText = `Description: ${data.description}`;
+        titleContainer.innerText = data.title;
+        descriptionContainer.innerText = data.description;
       });
     </script>
   </body>

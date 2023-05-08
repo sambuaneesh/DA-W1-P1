@@ -9,18 +9,18 @@ CORS(app)
 
 
 # Import adjectives
-with open("adjs.json") as f:
+with open("data/adjs.json") as f:
     adjectives = json.load(f)["adjs"]
 
 # Load nouns
-with open("nouns.json") as f:
+with open("data/nouns.json") as f:
     nouns = json.load(f)["nouns"]
 
 # Import verbs
-with open("verbs.json") as f:
+with open("data/verbs.json") as f:
     verbs = json.load(f)["verbs"]
 
-with open("settings.json") as f:
+with open("data/settings.json") as f:
     settings = json.load(f)["settings"]
 
 

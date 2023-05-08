@@ -1,32 +1,38 @@
-/* Styling for the header */
-h1 {
-  font-size: 2.5rem;
-  text-align: center;
-  margin-top: 2rem;
+:root {
+  --primary-color: #6d7fcc;
+  --secondary-color: #c0c0c0;
+  --bg-color: #f8f9fa;
+  --text-color: #333333;
 }
 
-/* Styling for the button */
-#generate-title-btn {
-  display: block;
-  margin: 2rem auto;
-  padding: 1rem;
-  background-color: #4caf50;
-  color: #fff;
-  border: none;
-  border-radius: 0.5rem;
-  font-size: 1.5rem;
-  cursor: pointer;
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
 }
 
-/* Styling for the title container */
-#title-container {
-  font-size: 1.5rem;
-  font-weight: bold;
-  margin-top: 2rem;
+.btn-primary {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
 }
 
-/* Styling for the description container */
-#description-container {
-  font-size: 1.2rem;
-  margin-top: 1rem;
+.btn-primary:hover,
+.btn-primary:focus {
+  background-color: #5c6bc0;
+  border-color: #5c6bc0;
+}
+
+.card {
+  background-color: var(--secondary-color);
+  color: var(--text-color);
+}
+
+.card-header {
+  background-color: var(--primary-color);
+  color: black;
+  font-size: x-large;
+}
+
+.card-footer {
+  background-color: var(--bg-color);
+  color: var(--text-color);
 }
