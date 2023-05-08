@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Random Anime Title Generator</title>
+  </head>
+  <body>
+    <h1>Random Anime Title Generator</h1>
+    <button id="generate-title-btn">Generate Title</button>
+    <div id="title-container"></div>
+    <div id="description-container"></div>
+
+    <script>
+      const generateTitleBtn = document.getElementById("generate-title-btn");
+      const titleContainer = document.getElementById("title-container");
+      const descriptionContainer = document.getElementById(
+        "description-container"
+      );
+
+      generateTitleBtn.addEventListener("click", async () => {
+        const response = await fetch("http://localhost:5000/generate_title", {
+          method: "POST",
+        });
+        const data = await response.json();
+
+        titleContainer.innerText = `Title: ${data.title}`;
+        descriptionContainer.innerText = `Description: ${data.description}`;
+      });
+    </script>
+  </body>
+</html>
