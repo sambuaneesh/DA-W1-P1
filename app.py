@@ -1,65 +1,37 @@
 from flask import Flask, jsonify, render_template, request
 import random
+import json
 from flask_cors import CORS
 
 app = Flask(__name__)
 CORS(app)
 
 
-adjectives = [
-    "Magical",
-    "Legendary",
-    "Epic",
-    "Mysterious",
-    "Chaotic",
-    "Cute",
-    "Fierce",
-    "Galactic",
-    "Enchanted",
-]
-nouns = [
-    "Warrior",
-    "Sword",
-    "Dragon",
-    "Hero",
-    "Princess",
-    "Samurai",
-    "Ninja",
-    "Robot",
-    "Adventure",
-]
-verbs = [
-    "Fights",
-    "Defeats",
-    "Saves",
-    "Conquers",
-    "Discovers",
-    "Travels",
-    "Explores",
-    "Transforms",
-    "Escapes",
-]
-settings = [
-    "Fantasy World",
-    "Outer Space",
-    "Futuristic City",
-    "Medieval Kingdom",
-    "Underwater Kingdom",
-    "Magical Forest",
-    "Post-Apocalyptic Wasteland",
-    "Alternate Dimension",
-]
+# Import adjectives
+with open("adjs.json") as f:
+    adjectives = json.load(f)["adjs"]
+
+# Load nouns
+with open("nouns.json") as f:
+    nouns = json.load(f)["nouns"]
+
+# Import verbs
+with open("verbs.json") as f:
+    verbs = json.load(f)["verbs"]
+
+with open("settings.json") as f:
+    settings = json.load(f)["settings"]
 
 
 def generate_name():
     title = (
-        random.choice(adjectives)
+        random.choice(adjectives).title().replace("_", " ")
         + " "
-        + random.choice(nouns)
+        + random.choice(nouns).title().replace("_", " ")
         + " "
-        + random.choice(verbs)
+        + random.choice(verbs)["present"].title().replace("_", " ")
         + " "
-        + random.choice(settings)
+        + random.choice(settings).title().replace("_", " ")
     )
     return title
 
@@ -68,18 +40,18 @@ def generate_name():
 def generate_description():
     description = (
         "In a "
-        + random.choice(settings)
+        + random.choice(settings).lower().replace("_", " ")
         + ", a "
-        + random.choice(adjectives)
+        + random.choice(adjectives).lower().replace("_", " ")
         + " "
-        + random.choice(nouns)
+        + random.choice(nouns).lower().replace("_", " ")
         + " "
-        + random.choice(verbs)
+        + random.choice(verbs)["present"].lower().replace("_", " ")
         + " "
-        + random.choice(settings)
+        + random.choice(settings).lower().replace("_", " ")
         + "."
     )
-    return description
+    return description.capitalize()
 
 
 @app.route("/generate_title", methods=["POST"])
