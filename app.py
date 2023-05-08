@@ -6,26 +6,86 @@ app = Flask(__name__)
 CORS(app)
 
 
-anime_titles = [
-    "Naruto",
-    "One Piece",
-    "Attack on Titan",
-    "Fullmetal Alchemist",
-    "Death Note",
+adjectives = [
+    "Magical",
+    "Legendary",
+    "Epic",
+    "Mysterious",
+    "Chaotic",
+    "Cute",
+    "Fierce",
+    "Galactic",
+    "Enchanted",
 ]
-anime_descriptions = [
-    "A story about a young ninja",
-    "A story about a pirate crew",
-    "A story about fighting titans",
-    "A story about alchemy",
-    "A story about a notebook that can kill people",
+nouns = [
+    "Warrior",
+    "Sword",
+    "Dragon",
+    "Hero",
+    "Princess",
+    "Samurai",
+    "Ninja",
+    "Robot",
+    "Adventure",
 ]
+verbs = [
+    "Fights",
+    "Defeats",
+    "Saves",
+    "Conquers",
+    "Discovers",
+    "Travels",
+    "Explores",
+    "Transforms",
+    "Escapes",
+]
+settings = [
+    "Fantasy World",
+    "Outer Space",
+    "Futuristic City",
+    "Medieval Kingdom",
+    "Underwater Kingdom",
+    "Magical Forest",
+    "Post-Apocalyptic Wasteland",
+    "Alternate Dimension",
+]
+
+
+def generate_name():
+    title = (
+        random.choice(adjectives)
+        + " "
+        + random.choice(nouns)
+        + " "
+        + random.choice(verbs)
+        + " "
+        + random.choice(settings)
+    )
+    return title
+
+
+# define a function to generate a random anime description
+def generate_description():
+    description = (
+        "In a "
+        + random.choice(settings)
+        + ", a "
+        + random.choice(adjectives)
+        + " "
+        + random.choice(nouns)
+        + " "
+        + random.choice(verbs)
+        + " "
+        + random.choice(settings)
+        + "."
+    )
+    return description
 
 
 @app.route("/generate_title", methods=["POST"])
 def generate_title():
-    title = random.choice(anime_titles)
-    description = random.choice(anime_descriptions)
+    title = generate_name()
+    description = generate_description()
     return jsonify({"title": title, "description": description})
 
 
