@@ -1,6 +1,7 @@
-from flask import Flask, jsonify, render_template, request
+from flask import Flask, jsonify, render_template, request, send_file
 import random
 import json
+
 from flask_cors import CORS
 
 app = Flask(__name__)
@@ -52,6 +53,11 @@ def generate_description():
         + "."
     )
     return description.capitalize()
+
+
+@app.route("/")
+def serve_html():
+    return send_file("index.html")
 
 
 @app.route("/generate_title", methods=["POST"])
